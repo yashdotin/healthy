@@ -87,10 +87,10 @@ select {
     left: -160px;
 }
 
-.navbar,
+
 .main {
     position: relative;
-    z-index: 2;
+    z-index: 0;
 }
 
 /* NAVBAR */
@@ -110,6 +110,9 @@ select {
     gap: 18px;
     padding: 14px 20px;
     box-shadow: var(--shadow-soft);
+    z-index: 20;
+    isolation: isolate;
+    pointer-events: auto;
 }
 
 .logo {
