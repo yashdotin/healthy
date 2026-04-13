@@ -1,0 +1,260 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="hero-card">
+    <div class="hero-kicker">HealthPulse AI • Early Risk Detection</div>
+
+    <h1 class="hero-title">AI Health Predictor</h1>
+
+    <p class="hero-subtitle">
+        A detailed cyberpunk-style health intelligence system that predicts
+        <b>Heart Disease</b>, <b>Diabetes</b> and <b>Stress</b>, explains the result in simple language,
+        and gives users a more interactive experience with learning games and stress-relief tools.
+    </p>
+
+    <div class="hero-badges">
+        <span class="badge">⚡ Fast predictions</span>
+        <span class="badge">🧠 AI-based insights</span>
+        <span class="badge">📊 Risk awareness</span>
+        <span class="badge">🎮 Built-in games</span>
+        <span class="badge">🌿 Stress relief tools</span>
+    </div>
+
+    <div class="hero-actions">
+        <a class="btn btn-primary" href="#what-it-does">Explore Features</a>
+        <a class="btn btn-secondary" href="#games">Play Games</a>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <strong>3</strong>
+            <span>AI model zones</span>
+        </div>
+        <div class="stat-card">
+            <strong>4</strong>
+            <span>Mini game modes</span>
+        </div>
+        <div class="stat-card">
+            <strong>1</strong>
+            <span>Beautiful dashboard</span>
+        </div>
+        <div class="stat-card">
+            <strong>∞</strong>
+            <span>Neon vibes</span>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="what-it-does">
+    <div class="section-head">
+        <h2 class="section-title">What This AI Does</h2>
+        <p class="section-copy">
+            It evaluates health-related inputs and helps users understand what their numbers may indicate.
+            The goal is not only prediction, but early awareness, simple explanation, and a better user journey.
+        </p>
+    </div>
+
+    <div class="grid">
+        <article class="feature-card">
+            <div class="feature-kicker">❤️ Cardiac Signals</div>
+            <h3>Heart Disease Risk</h3>
+            <p>Uses clinical indicators like blood pressure, cholesterol, heart rate and ECG markers to estimate cardiovascular risk.</p>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-kicker">🧪 Metabolic Health</div>
+            <h3>Diabetes Prediction</h3>
+            <p>Analyzes glucose, BMI, insulin, pedigree history, age, and related markers to detect diabetes risk patterns.</p>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-kicker">🫁 Mental Wellbeing</div>
+            <h3>Stress Detection</h3>
+            <p>Interprets academic, lifestyle, and psychological signals to provide a stress-level indication.</p>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-head">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-copy">
+            The flow is intentionally simple: input the data, let the model analyze it, and receive a clean result with actionable direction.
+        </p>
+    </div>
+
+    <div class="timeline">
+        <div class="step">
+            <div class="step-number">1</div>
+            <h3>Enter health data</h3>
+            <p>Users fill the prediction form with the exact clinical or survey values needed by the model.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">2</div>
+            <h3>AI processes the pattern</h3>
+            <p>The trained model evaluates the values and looks for the patterns it learned during training.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">3</div>
+            <h3>Get result + guidance</h3>
+            <p>Show the prediction clearly and add supportive suggestions, next steps, and helpful extras.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-head">
+        <h2 class="section-title">Choose a Prediction</h2>
+        <p class="section-copy">
+            Each prediction room has its own visual identity, so the site feels like a real product instead of a plain form dump.
+        </p>
+    </div>
+
+    <div class="grid">
+        <a href="/heart/" class="feature-card link-card">
+            <div class="feature-kicker">❤️ Cardiology</div>
+            <h3>Heart Disease</h3>
+            <p>Open the detailed heart prediction room with a rotating heart visual and a smart risk meter.</p>
+        </a>
+
+        <a href="/diabetes/" class="feature-card link-card">
+            <div class="feature-kicker">🧪 Metabolism</div>
+            <h3>Diabetes</h3>
+            <p>Open the diabetes prediction room with a metabolism visual and one-click guidance.</p>
+        </a>
+
+        <a href="/stress/" class="feature-card link-card">
+            <div class="feature-kicker">🫁 Mental Health</div>
+            <h3>Stress</h3>
+            <p>Open the stress analysis room with lungs, breathing animation, and a mini calm-down game.</p>
+        </a>
+    </div>
+</section>
+
+<section class="section" id="games">
+    <div class="section-head">
+        <h2 class="section-title">Play Games</h2>
+        <p class="section-copy">
+            The homepage now feels alive with categories for stress relief, learning, reflex and memory.
+        </p>
+    </div>
+
+    <div class="games-shell">
+        <div class="game-tabs">
+            <button class="game-tab active" type="button" data-game="stressGame">Stress Relief</button>
+            <button class="game-tab" type="button" data-game="learningGame">Learning Game</button>
+            <button class="game-tab" type="button" data-game="reflexGame">Reflex Dash</button>
+            <button class="game-tab" type="button" data-game="memoryGame">Memory Pulse</button>
+        </div>
+
+        <div id="stressGame" class="game-panel active">
+            <div class="game-box">
+                <h3>🌿 30-Second Breathing Reset</h3>
+                <p>Click start and follow the breathing orb. It expands and contracts to encourage a calming rhythm.</p>
+                <button class="game-btn" type="button" onclick="startBreathing()">Start Breathing Game</button>
+                <div class="score-pill">Timer: <span id="breathTimer">30</span>s</div>
+            </div>
+
+            <div class="game-box center-box">
+                <div class="breath-orb" id="breathOrb">
+                    <span id="breathText">Breathe</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="learningGame" class="game-panel">
+            <div class="game-box">
+                <h3>🧠 Quick Learning Quiz</h3>
+                <p>Answer a tiny health question. This keeps the homepage engaging and slightly educational.</p>
+
+                <div class="small-note" id="quizPrompt">
+                    What habit helps heart health the most?
+                </div>
+
+                <div class="quiz-options">
+                    <button type="button" onclick="answerQuiz(true)">Regular movement + balanced diet</button>
+                    <button type="button" onclick="answerQuiz(false)">Skipping sleep daily</button>
+                    <button type="button" onclick="answerQuiz(false)">More salt and less water</button>
+                </div>
+
+                <div class="score-pill">Score: <span id="quizScore">0</span></div>
+                <div class="small-note" id="quizFeedback" style="margin-top:10px;"></div>
+            </div>
+
+            <div class="game-box">
+                <h3>📚 Mini Learning Goals</h3>
+                <p>Users can learn tiny health facts while exploring the app, making the product feel less static.</p>
+                <div class="stack">
+                    <div class="mini-info">
+                        <strong>Heart</strong>
+                        <span>Activity, cholesterol, BP and chest pain matter.</span>
+                    </div>
+                    <div class="mini-info">
+                        <strong>Diabetes</strong>
+                        <span>Glucose, BMI, insulin and family history are important clues.</span>
+                    </div>
+                    <div class="mini-info">
+                        <strong>Stress</strong>
+                        <span>Sleep, routine, anxiety and support systems can shift outcomes.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="reflexGame" class="game-panel">
+            <div class="game-box">
+                <h3>🎯 Reflex Dash</h3>
+                <p>Tap the target as many times as you can. It keeps the page energetic and playful.</p>
+                <button class="game-btn" type="button" onclick="moveTarget()">Move Target</button>
+                <div class="score-pill">Hits: <span id="focusScore">0</span></div>
+            </div>
+
+            <div class="game-box">
+                <div class="focus-stage" id="focusStage">
+                    <div class="focus-target" id="focusTarget" onclick="hitTarget()">GO</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="memoryGame" class="game-panel">
+            <div class="game-box">
+                <h3>🧩 Memory Pulse</h3>
+                <p>Watch the color pattern, then repeat it. Short memory games make the site feel more premium and interactive.</p>
+                <button class="game-btn" type="button" onclick="startMemoryGame()">Start Memory Game</button>
+                <div class="score-pill">Level: <span id="memoryLevel">1</span> · Score: <span id="memoryScore">0</span></div>
+                <div class="small-note" id="memoryStatus" style="margin-top:10px;">Press start to begin.</div>
+            </div>
+
+            <div class="game-box">
+                <div class="memory-board">
+                    <button type="button" class="memory-btn cyan" onclick="pickMemoryColor('cyan')">Cyan</button>
+                    <button type="button" class="memory-btn pink" onclick="pickMemoryColor('pink')">Pink</button>
+                    <button type="button" class="memory-btn violet" onclick="pickMemoryColor('violet')">Violet</button>
+                    <button type="button" class="memory-btn lime" onclick="pickMemoryColor('lime')">Lime</button>
+                </div>
+                <div class="small-note" id="memoryPattern" style="margin-top:14px;">Pattern will appear here.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="final-cta">
+        <div>
+            <h2>Ready to test your signals?</h2>
+            <p>
+                Jump into one of the prediction rooms and see the risk meter, advice output, and visual identity together.
+            </p>
+        </div>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="/heart/">Open Heart</a>
+            <a class="btn btn-secondary" href="/diabetes/">Open Diabetes</a>
+            <a class="btn btn-secondary" href="/stress/">Open Stress</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="page-split">
+    <div class="visual-card">
+        <div class="organ-visual">
+            <div class="orbit one"></div>
+            <div class="orbit two"></div>
+            <div class="orbit three"></div>
+
+            <div class="heart-mini one">❤️</div>
+            <div class="heart-mini two">💓</div>
+            <div class="heart-mini three">💖</div>
+
+            <div class="heart-core">❤️</div>
+
+            <div class="organ-caption">
+                <strong>Body Map for Heart Health</strong>
+                <span>
+                    Heart keeps blood moving, lungs keep oxygen flowing, and stomach supports energy through nutrition.
+                    This visual makes the page feel more alive and medical, not like a plain form.
+                </span>
+            </div>
+        </div>
+
+        <div class="ghost-divider"></div>
+
+        <div class="grid-2">
+            <div class="mini-info">
+                <strong>❤️ Heart</strong>
+                <span>Blood pump, rhythm, pressure, cholesterol and circulation.</span>
+            </div>
+            <div class="mini-info">
+                <strong>🫁 Lungs</strong>
+                <span>Oxygen intake matters because it affects stamina and cardiac load.</span>
+            </div>
+            <div class="mini-info">
+                <strong>🍽️ Stomach</strong>
+                <span>Food quality and digestion influence weight, sugar and energy balance.</span>
+            </div>
+            <div class="mini-info">
+                <strong>AI Tip</strong>
+                <span>Use one clear value flow: visible fields for humans, hidden dummies for the model.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <div class="page-hero-label">Clinical Model · Important Inputs</div>
+        <h2 class="card-title">❤️ Heart Disease Prediction</h2>
+        <p class="card-lead">
+            Enter the key heart-related features. The one-hot columns are hidden behind the scenes and filled automatically.
+        </p>
+
+        <form method="POST" class="heart-form" onsubmit="prepareHeartForm()">
+            {% csrf_token %}
+
+            <div class="form-section">
+                <h4>Vital Signs</h4>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label>Age</label>
+                        <input type="number" name="age" min="1" max="120" placeholder="Age">
+                        <small class="helper">Typical range: 20 - 100</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Sex</label>
+                        <select name="sex">
+                            <option value="0">Female</option>
+                            <option value="1">Male</option>
+                        </select>
+                        <small class="helper">Binary: 0 or 1</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Resting BP</label>
+                        <input type="number" name="trestbps" min="50" max="250" placeholder="trestbps">
+                        <small class="helper">Typical range: 90 - 200</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Cholesterol</label>
+                        <input type="number" name="chol" min="50" max="700" placeholder="chol">
+                        <small class="helper">Typical range: 100 - 600</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Fasting Blood Sugar</label>
+                        <select name="fbs">
+                            <option value="0">Normal</option>
+                            <option value="1">High</option>
+                        </select>
+                        <small class="helper">Binary: 0 or 1</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Max Heart Rate</label>
+                        <input type="number" name="thalach" min="40" max="250" placeholder="thalach">
+                        <small class="helper">Typical range: 70 - 210</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h4>Stress / Exercise Markers</h4>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label>Exercise Induced Angina</label>
+                        <select name="exang">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                        <small class="helper">Binary: 0 or 1</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Oldpeak</label>
+                        <input type="number" name="oldpeak" step="0.1" min="0" max="10" placeholder="oldpeak">
+                        <small class="helper">Example: 0.0 - 6.0</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Slope</label>
+                        <select name="slope">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                        <small class="helper">Encoded slope value</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>CA</label>
+                        <select name="ca">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                        <small class="helper">Number of major vessels</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h4>Medical Categories</h4>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label>Chest Pain Type</label>
+                        <select name="cp">
+                            <option value="0">Type 0</option>
+                            <option value="1">Type 1</option>
+                            <option value="2">Type 2</option>
+                            <option value="3">Type 3</option>
+                        </select>
+                        <small class="helper">Maps to hidden cp_1 / cp_2 / cp_3 values.</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Restecg</label>
+                        <select name="restecg">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                        <small class="helper">Maps to restecg_1 / restecg_2.</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Thal</label>
+                        <select name="thal">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <small class="helper">Maps to thal_1 / thal_2 / thal_3.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h4>What the model receives behind the scenes</h4>
+                <div class="stack">
+                    <div class="mini-info">
+                        <strong>Hidden one-hot features</strong>
+                        <span>cp_1, cp_2, cp_3, restecg_1, restecg_2, thal_1, thal_2, thal_3 are automatically created from your selections.</span>
+                    </div>
+                    <div class="mini-info">
+                        <strong>Why this looks better</strong>
+                        <span>You get a human-friendly form while the model still receives exactly the columns it was trained on.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn-wide" type="submit">Analyze Heart Risk</button>
+            </div>
+
+            <input type="hidden" id="cp_1" name="cp_1" value="0">
+            <input type="hidden" id="cp_2" name="cp_2" value="0">
+            <input type="hidden" id="cp_3" name="cp_3" value="0">
+            <input type="hidden" id="restecg_1" name="restecg_1" value="0">
+            <input type="hidden" id="restecg_2" name="restecg_2" value="0">
+            <input type="hidden" id="thal_1" name="thal_1" value="0">
+            <input type="hidden" id="thal_2" name="thal_2" value="0">
+            <input type="hidden" id="thal_3" name="thal_3" value="0">
+        </form>
+
+        {% if risk_percent is not None %}
+        <div class="result-box">
+            <div class="result-row">
+                {% if risk_percent >= 70 %}
+                    <span class="result-chip result-high">{{ risk_percent|floatformat:1 }}% · High Risk ❤️</span>
+                {% elif risk_percent >= 40 %}
+                    <span class="result-chip result-warn">{{ risk_percent|floatformat:1 }}% · Moderate Risk</span>
+                {% else %}
+                    <span class="result-chip result-ok">{{ risk_percent|floatformat:1 }}% · Low Risk 💚</span>
+                {% endif %}
+            </div>
+
+            <div class="risk-meter" style="margin-top:14px;">
+                <div class="risk-fill" style="width: {{ risk_percent }}%;"></div>
+            </div>
+
+            <div class="mini-info" style="margin-top:14px;">
+                <strong>AI Suggestion</strong>
+                <span>{{ advice|linebreaksbr }}</span>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

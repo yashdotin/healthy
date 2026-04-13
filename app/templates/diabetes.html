@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="page-split">
+    <div class="visual-card">
+        <div class="organ-visual">
+            <div class="orbit one"></div>
+            <div class="orbit two"></div>
+            <div class="orbit three"></div>
+
+            <div class="glucose-dot one"></div>
+            <div class="glucose-dot two"></div>
+            <div class="glucose-dot three"></div>
+
+            <div class="metabolism-core"></div>
+
+            <div class="organ-caption">
+                <strong>Digestive / Metabolism Visual</strong>
+                <span>
+                    Glucose, BMI and insulin are linked with digestion and metabolic health, so the page uses a warm organ-style visual rather than a plain card.
+                </span>
+            </div>
+        </div>
+
+        <div class="ghost-divider"></div>
+
+        <div class="grid-2">
+            <div class="mini-info">
+                <strong>🩸 Glucose</strong>
+                <span>The strongest day-to-day signal for diabetes risk.</span>
+            </div>
+            <div class="mini-info">
+                <strong>🍽️ BMI</strong>
+                <span>Weight balance influences insulin sensitivity.</span>
+            </div>
+            <div class="mini-info">
+                <strong>🧬 Family history</strong>
+                <span>Pedigree function adds inherited risk context.</span>
+            </div>
+            <div class="mini-info">
+                <strong>AI Tip</strong>
+                <span>Keep sugar control, regular walking, and balanced meals in focus.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <div class="page-hero-label">Metabolic Model · Core Inputs</div>
+        <h2 class="card-title">🧪 Diabetes Prediction</h2>
+        <p class="card-lead">
+            This page keeps all 8 diabetes features visible, because they are already compact and important for the model.
+        </p>
+
+        <form method="POST" class="diabetes-form">
+            {% csrf_token %}
+
+            <div class="form-section">
+                <h4>Metabolic Inputs</h4>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label>Pregnancies</label>
+                        <input type="number" name="Pregnancies" min="0" max="20" placeholder="Pregnancies">
+                        <small class="helper">Typical range: 0 - 20</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Glucose</label>
+                        <input type="number" name="Glucose" min="0" max="300" placeholder="Glucose">
+                        <small class="helper">Typical range: 70 - 200</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Blood Pressure</label>
+                        <input type="number" name="BloodPressure" min="0" max="220" placeholder="BloodPressure">
+                        <small class="helper">Typical range: 60 - 180</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Skin Thickness</label>
+                        <input type="number" name="SkinThickness" min="0" max="120" placeholder="SkinThickness">
+                        <small class="helper">Typical range: 0 - 100</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Insulin</label>
+                        <input type="number" name="Insulin" min="0" max="1000" placeholder="Insulin">
+                        <small class="helper">Typical range: 15 - 900</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>BMI</label>
+                        <input type="number" name="BMI" step="0.1" min="0" max="80" placeholder="BMI">
+                        <small class="helper">Typical range: 15 - 50</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Diabetes Pedigree Function</label>
+                        <input type="number" name="DiabetesPedigreeFunction" step="0.01" min="0" max="5" placeholder="DiabetesPedigreeFunction">
+                        <small class="helper">Typical range: 0.1 - 2.5</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Age</label>
+                        <input type="number" name="Age" min="1" max="120" placeholder="Age">
+                        <small class="helper">Typical range: 20 - 100</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h4>What the model is thinking</h4>
+                <div class="stack">
+                    <div class="mini-info">
+                        <strong>Glucose is the big signal</strong>
+                        <span>The model mostly cares about how glucose, BMI, insulin and family history move together.</span>
+                    </div>
+                    <div class="mini-info">
+                        <strong>Exercise recommendation</strong>
+                        <span>Walking after meals, gentle cardio, and consistent sleep make the output more actionable.</span>
+                    </div>
+                    <div class="mini-info">
+                        <strong>Meal advice</strong>
+                        <span>Less sugar, more protein and fiber, and steady meal timing are usually the cleanest next steps.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn-wide" type="submit">Analyze Diabetes Risk</button>
+            </div>
+        </form>
+
+        {% if risk_percent is not None %}
+        <div class="result-box">
+            <div class="result-row">
+                {% if risk_percent >= 70 %}
+                    <span class="result-chip result-high">{{ risk_percent|floatformat:1 }}% · High Risk 🧪</span>
+                {% elif risk_percent >= 40 %}
+                    <span class="result-chip result-warn">{{ risk_percent|floatformat:1 }}% · Moderate Risk</span>
+                {% else %}
+                    <span class="result-chip result-ok">{{ risk_percent|floatformat:1 }}% · Low Risk ✅</span>
+                {% endif %}
+            </div>
+
+            <div class="risk-meter" style="margin-top:14px;">
+                <div class="risk-fill" style="width: {{ risk_percent }}%;"></div>
+            </div>
+
+            <div class="mini-info" style="margin-top:14px;">
+                <strong>AI Suggestion</strong>
+                <span>{{ advice|linebreaksbr }}</span>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

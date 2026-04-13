@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="page-split">
+    <div class="visual-card">
+        <div class="organ-visual">
+            <div class="orbit one"></div>
+            <div class="orbit two"></div>
+            <div class="orbit three"></div>
+
+            <div class="air-wave"></div>
+            <div class="air-wave two"></div>
+            <div class="air-wave three"></div>
+
+            <div class="lungs-core">
+                <div class="trachea"></div>
+                <div class="lung left"></div>
+                <div class="lung right"></div>
+            </div>
+
+            <div class="organ-caption">
+                <strong>Lungs + Breathing Visual</strong>
+                <span>
+                    This page uses a moving lungs animation and a breathing reset game so the stress experience feels more supportive and interactive.
+                </span>
+            </div>
+        </div>
+
+        <div class="ghost-divider"></div>
+
+        <div class="grid-2">
+            <div class="mini-info">
+                <strong>🫁 Breathing</strong>
+                <span>Slow breathing helps reduce pressure and panic spikes.</span>
+            </div>
+            <div class="mini-info">
+                <strong>🧠 Routine</strong>
+                <span>Sleep, study flow and breaks matter a lot for stress.</span>
+            </div>
+            <div class="mini-info">
+                <strong>🎮 Game</strong>
+                <span>A calm mini game keeps the page interactive and supportive.</span>
+            </div>
+            <div class="mini-info">
+                <strong>AI Tip</strong>
+                <span>Short breaks, hydration and fewer late-night sessions are useful next steps.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <div class="page-hero-label">Stress Model · Human Inputs</div>
+        <h2 class="card-title">🫁 Stress Prediction</h2>
+        <p class="card-lead">
+            The important human-readable fields stay visible. All encoded dummy columns are hidden and set automatically behind the scenes.
+        </p>
+
+        <form method="POST" class="stress-form" onsubmit="prepareStressForm()">
+            {% csrf_token %}
+
+            <div class="form-section">
+                <h4>Personal & Academic Details</h4>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label>Choose your gender</label>
+                        <select name="Choose your gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Age</label>
+                        <input type="number" name="Age" min="10" max="40" placeholder="Age">
+                        <small class="helper">Typical student range</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>What is your course?</label>
+                        <select name="What is your course?">
+                            <option value="Engineering">Engineering</option>
+                            <option value="BIT">BIT</option>
+                            <option value="BCA">BCA</option>
+                            <option value="BDS">BDS</option>
+                            <option value="Accounting">Accounting</option>
+                            <option value="Banking Studies">Banking Studies</option>
+                            <option value="Biomedical science">Biomedical science</option>
+                            <option value="Diploma Nursing">Diploma Nursing</option>
+                            <option value="DIPLOMA TESL">DIPLOMA TESL</option>
+                            <option value="IT">IT</option>
+                            <option value="KIRKHS">KIRKHS</option>
+                            <option value="KENMS">KENMS</option>
+                            <option value="Laws">Laws</option>
+                            <option value="Marine science">Marine science</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Nursing">Nursing</option>
+                            <option value="Pendidikan Islam">Pendidikan Islam</option>
+                            <option value="Pendidikan Khas">Pendidikan Khas</option>
+                            <option value="Psychology">Psychology</option>
+                            <option value="Radiography">Radiography</option>
+                            <option value="Human Resources">Human Resources</option>
+                            <option value="MHSC">MHSC</option>
+                            <option value="BENL">BENL</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Your current year of Study</label>
+                        <select name="Your current year of Study">
+                            <option value="year 1">Year 1</option>
+                            <option value="year 2">Year 2</option>
+                            <option value="year 3">Year 3</option>
+                            <option value="year 4">Year 4</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>What is your CGPA?</label>
+                        <select name="What is your CGPA?">
+                            <option value="0 - 1.99">0 - 1.99</option>
+                            <option value="2.00 - 2.49">2.00 - 2.49</option>
+                            <option value="2.50 - 2.99">2.50 - 2.99</option>
+                            <option value="3.00 - 3.49">3.00 - 3.49</option>
+                            <option value="3.50 - 4.00">3.50 - 4.00</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Marital status</label>
+                        <select name="Marital status">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h4>Mental Health Signals</h4>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label>Do you have Depression?</label>
+                        <select name="Do you have Depression?">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Do you have Anxiety?</label>
+                        <select name="Do you have Anxiety?">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Do you have Panic attack?</label>
+                        <select name="Do you have Panic attack?">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Did you seek any specialist for a treatment?</label>
+                        <select name="Did you seek any specialist for a treatment?">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h4>What the model receives behind the scenes</h4>
+                <div class="stack">
+                    <div class="mini-info">
+                        <strong>Hidden one-hot columns</strong>
+                        <span>Course, CGPA, year, gender, marital status and mental-health answer columns are converted automatically to the exact dummy fields your model expects.</span>
+                    </div>
+                    <div class="mini-info">
+                        <strong>Why this is better</strong>
+                        <span>The user sees only friendly questions, while the model still receives all the encoded features it was trained with.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn-wide" type="submit">Analyze Stress</button>
+            </div>
+
+            {% for f in stress_features %}
+                {% if f != "Age" and f != "Choose your gender" and f != "What is your course?" and f != "Your current year of Study" and f != "What is your CGPA?" and f != "Marital status" and f != "Do you have Depression?" and f != "Do you have Anxiety?" and f != "Do you have Panic attack?" and f != "Did you seek any specialist for a treatment?" %}
+                    <input type="hidden" name="{{ f }}" value="0" data-auto="stress">
+                {% endif %}
+            {% endfor %}
+        </form>
+
+        {% if risk_percent is not None %}
+        <div class="result-box">
+            <div class="result-row">
+                {% if risk_percent >= 70 %}
+                    <span class="result-chip result-high">{{ risk_percent|floatformat:1 }}% · High Stress 😰</span>
+                {% elif risk_percent >= 40 %}
+                    <span class="result-chip result-warn">{{ risk_percent|floatformat:1 }}% · Moderate Stress</span>
+                {% else %}
+                    <span class="result-chip result-ok">{{ risk_percent|floatformat:1 }}% · Low Stress 😊</span>
+                {% endif %}
+            </div>
+
+            <div class="risk-meter" style="margin-top:14px;">
+                <div class="risk-fill" style="width: {{ risk_percent }}%;"></div>
+            </div>
+
+            <div class="mini-info" style="margin-top:14px;">
+                <strong>AI Suggestion</strong>
+                <span>{{ advice|linebreaksbr }}</span>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="ghost-divider"></div>
+
+        <div class="game-box">
+            <h3>🧠 Relax Game</h3>
+            <p>Click to release stress and breathe with the moving orb.</p>
+
+            <button class="game-btn" type="button" onclick="clickGame()">Click Me</button>
+            <div class="score-pill">Score: <span id="score">0</span></div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
