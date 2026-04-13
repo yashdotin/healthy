@@ -6,22 +6,33 @@ import joblib
 import pandas as pd
 from django.conf import settings
 
+from pathlib import Path
+import random
+import joblib
+import pandas as pd
+from django.conf import settings
+
 try:
     from openai import OpenAI
 except Exception:
     OpenAI = None
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-heart_model = joblib.load(BASE_DIR / "models" / "heart_model.pkl")
-heart_features = joblib.load(BASE_DIR / "models" / "heart_features.pkl")
+def load_pickle(relative_path, label):
+    path = BASE_DIR / relative_path
+    if not path.exists():
+        raise FileNotFoundError(f"{label} not found at: {path}")
+    return joblib.load(path)
 
-diabetes_model = joblib.load(BASE_DIR / "models" / "diabetes_model.pkl")
-diabetes_features = joblib.load(BASE_DIR / "models" / "diabetes_features.pkl")
+heart_model = load_pickle("models/heart_model.pkl", "heart_model")
+heart_features = load_pickle("models/heart_features.pkl", "heart_features")
 
-stress_model = joblib.load(BASE_DIR / "models" / "stress_model.pkl")
-stress_features = joblib.load(BASE_DIR / "models" / "stress_features.pkl")
+diabetes_model = load_pickle("models/diabetes_model.pkl", "diabetes_model")
+diabetes_features = load_pickle("models/diabetes_features.pkl", "diabetes_features")
+
+stress_model = load_pickle("models/stress_model.pkl", "stress_model")
+stress_features = load_pickle("models/stress_features.pkl", "stress_features")
 
 
 def safe_float(value, default=0.0):
